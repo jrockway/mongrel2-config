@@ -1,23 +1,25 @@
 package Mongrel2::Config;
-# ABSTRACT: interact with Mongrel2's configuration database
+
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
-use true;
-use namespace::autoclean;
+
+use base 'DBIx::Class::Schema';
+
+__PACKAGE__->load_namespaces;
+
+
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2011-01-16 00:10:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:OdV/OrD4v1bbZeQsInbFow
 
 use Path::Class;
 use Scalar::Util qw(blessed);
 use File::ShareDir qw(dist_dir);
 
-use parent 'DBIx::Class::Schema';
-
 sub deploy {
     my ($self, $schema_files) = @_;
-
-    # to deploy, we use the pristine SQL files as shipped with
-    # mongrel2.  this way, you'll get weird errors from your perl
-    # script instead of weird errors from your production web server
-    # when the schema changes.
 
     $schema_files ||= dist_dir 'Mongrel2-Config';
     $schema_files = dir($schema_files) unless blessed $schema_files;
@@ -31,4 +33,4 @@ sub deploy {
     });
 }
 
-__PACKAGE__->load_namespaces;
+1;
