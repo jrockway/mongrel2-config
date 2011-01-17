@@ -66,6 +66,20 @@ __PACKAGE__->set_primary_key("id");
 # Created by DBIx::Class::Schema::Loader v0.07002 @ 2011-01-16 00:10:22
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cy7AFBsXXiFHdtjYUjel1w
 
+=head1 RELATIONSHIPS
 
-# You can replace this text with custom content, and it will be preserved on regeneration
+=head2 belongs_to server
+
+The server that this host belongs to.
+
+=head2 has_many routes
+
+The routs that this server handles.
+
+=cut
+
+__PACKAGE__->belongs_to( server => 'Mongrel2::Config::Result::Server', 'server_id' );
+
+__PACKAGE__->has_many( routes => 'Mongrel2::Config::Result::Route', 'host_id' );
+
 1;

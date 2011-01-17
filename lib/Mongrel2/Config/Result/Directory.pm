@@ -58,6 +58,17 @@ __PACKAGE__->set_primary_key("id");
 # Created by DBIx::Class::Schema::Loader v0.07002 @ 2011-01-16 00:10:22
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:XyEwqlt/hs1iEbUgb0r4Ng
 
+=head1 RELATIONSHIPS
 
-# You can replace this text with custom content, and it will be preserved on regeneration
+=head2 has_many routes
+
+The routes that point to this directory.
+
+=cut
+
+__PACKAGE__->has_many(
+    routes => 'Mongrel2::Config::Result::Route', 'target_id',
+    { where => { 'target_type' => 'dir' } },
+);
+
 1;
