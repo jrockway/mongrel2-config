@@ -8,7 +8,8 @@ my $schema = Mongrel2::Config->connect('DBI:SQLite::memory:');
 $schema->deploy;
 
 my $server = $schema->resultset('Server')->create({
-    uuid => '2676edd5-7493-4dc6-a85c-e09e9f445076',
+    uuid         => '2676edd5-7493-4dc6-a85c-e09e9f445076',
+    default_host => 'localhost',
 });
 
 my $host = $server->create_related( hosts => {
@@ -57,6 +58,7 @@ my $bar = $host->create_related('routes' => {
 my $routes = $schema->resultset('Route');
 
 is $server->hosts->count, 1, 'one host';
+is $server->default_host->name, 'localhost', 'got default host ok';
 is $server->hosts->related_resultset('routes')->count, 3, '3 routes for this server';
 is $routes->count, 3, '3 routes total';
 

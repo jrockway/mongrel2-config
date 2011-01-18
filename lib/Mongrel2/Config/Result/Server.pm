@@ -117,6 +117,9 @@ The default host
 
 __PACKAGE__->has_many( hosts => 'Mongrel2::Config::Result::Host', 'server_id' );
 
-__PACKAGE__->might_have( default_host => 'Mongrel2::Config::Result::Host' );
+__PACKAGE__->belongs_to(
+    default_host => 'Mongrel2::Config::Result::Host',
+    { 'foreign.name' => 'self.default_host' },
+);
 
 1;
